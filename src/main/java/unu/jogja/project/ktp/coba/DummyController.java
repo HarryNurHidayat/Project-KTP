@@ -25,46 +25,52 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 public class DummyController {
-    DummyJpaController dummyController = new DummyJpaController();
-    List<Dummy> data = new ArrayList<>();
     
-    @RequestMapping("/dummy")
-    public String getDummy (Model model) {
-        try {
-            data = dummyController.findDummyEntities();
-        }
-        catch (Exception e) {
+    DummyJpaController dummyctrl = new DummyJpaController();
+    List<Dummy> data = new ArrayList<>();
 
+    @RequestMapping("/dummy")
+//    @ResponseBody
+    public String getDummy(Model model){
+    
+        int record = dummyctrl.getDummyCount();
+        String result = "";
+        try{
+            data = dummyctrl.findDummyEntities().subList(0, record);
         }
+        catch (Exception e){
+            result=e.getMessage();
+        }
+        
         model.addAttribute("goDummy", data);
+         model.addAttribute("record", record);
+         
         return "dummy";
     }
     
     @RequestMapping("/create")
-    public String createDummy() {
+    public String createDummy(){
         return "dummy/create";
     }
     
-    @PostMapping(value = "/dummy", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String newDummy(@RequestParam("gambar") MultipartFile file, HttpServletRequest data) throws ParseException, Exception {
+    @PostMapping(value = "/newdata", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String newDummy(HttpServletRequest data,@RequestParam("gambar") MultipartFile file) throws ParseException, Exception{
         Dummy dumdata = new Dummy();
         
         String id = data.getParameter("id");
         int iid = Integer.parseInt(id);
         
-        
-        String tanggal = data.getParameter("tanggal");
+        String tanggal = data.getParameter("date");
         Date date = new SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
-                
+        
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
-        byte[] gambar = file.getBytes();
+        byte[] image = file.getBytes();
         
         dumdata.setId(iid);
         dumdata.setTanggal(date);
-        dumdata.setGambar(gambar);
+        dumdata.setGambar(image);
         
-        dummyController.create(dumdata);
-        
+        dummyctrl.create(dumdata);
         
         return "dummy/create";
     }

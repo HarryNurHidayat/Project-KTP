@@ -14,25 +14,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <section class="container-fluid">
             <div class="mt-3 fw-bold text-center">Dummy Creating</div>
             <hr />
-            <form action="/dummy" method="post" enctype="multipart/form-data">
-                <table>
-                    <tr>
-                        <td>ID</td>
-                        <td><input type="text" class="rounded ms-3" placeholder="Masukkan id" name="id"></td>
-                    </tr>
-                    <tr>
-                        <td>Tanggal</td>
-                        <td><input type="date" class="mt-3 ms-3" name="tanggal"></td>
-                    </tr>
-                    <tr>
-                        <td>Foto</td>
-                        <td><input accept="image/*" type="file" class="mt-3 ms-3" name="gambar"></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <button type="submit" class="btn btn-primary mt-3 ms-3">Submit</button>
-                            <a href="/dummy" class="btn btn-secondary ms-3 mt-3">Back</a>
+            <form action="/newdata" method="POST" enctype="multipart/form-data">
+            <table>
+                <tr>
+                <td>ID</td>
+                <td>
+                    <input type="text" name="id">
+                </td>
+            </tr>
+            <tr>
+                <td>Tanggal Lahir</td>
+                <td>
+                    <input type="date" name="date">
+                </td>
+            </tr>
+            <tr>
+                <td>Foto</td>
+                <td>
+                    <input type="file" name="gambar">
+                </td>
+            </tr>
+            </table> 
+                <td>
+                    <button type="/dummy" class="btn btn-primary mt-3 ms-3">Submit</button>
+                    <a href="/dummy" class="btn btn-secondary ms-3 mt-3">Back</a>
                         </td>
                     </tr>
                 </table>

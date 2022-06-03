@@ -50,31 +50,32 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         </nav>
         <br>
         <div align="center">Database KTP Indonesia - Dummy</div>
-        <a href="/create">Data Baru</a>
-        <a href="/">Cari Data</a>
+        <a href="/create">Data baru</a>
+        <a href="/search">Cari data</a>
         <br><br>
         <div>
-            <table class="table table-striped table-hover table-bordered">
+            <div class="table-responsive">
+<!--                <table id="tabelKTP" class="table table-primary table-striped align-middle">-->
+                <table class="table align-middle">
                 <thead>
-                    <tr class="table-dark" align="center">
+                    <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Tanggal Lahir</th>
                         <th scope="col">Foto</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
-                    <tbody>
-                        <tr th:each="godummy:${goDummy}">
-                            <td th:text="${godummy.id}"></td>
-                            <td th:text="${#calendars.format(godummy.tanggal, 'dd MMMM yyyy')}"></td>
-                            <td><img th:src="@{${'/img?id='+ godummy.id}}" class="rounded" alt="gambar" width="100" /></td>
-                            <td>
-                                <a href="/detail" class="btn btn-success">Detail</a>
-                                <a href="/edit" class="btn btn-primary">Edit</a>
-                                <a href="/delete" class="btn btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                    </tbody>
+                <tbody>
+                    <tr th:each="goDummy:${goDummy}">
+                        <td th:text="${goDummy.id}"></td>
+                        <td th:text="${#calendars.format(goDummy.tanggal, 'dd-MM-yyyy')}"></td>
+                        <td><img src="@{${'/image?id='+ goDummy.id}}" class="rounded" alt="gambar" width="100"/></td>
+                        <td><a th:href="${'/project.ktp/detail/' + goDummy.id}" class="btn btn-success">Detail</a>
+                            <a th:href="${'/project.ktp/edit/' + goDummy.id}" class="btn btn-primary">Edit</a>
+                            <a th:href="${'/project.ktp/delete/' + goDummy.id}" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </body>

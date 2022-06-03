@@ -19,23 +19,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class DataController {
     
-    DataJpaController datactrl = new DataJpaController();
+    DataJpaController dataktpJpaController = new DataJpaController();
     List<Data> newdata = new ArrayList<>();
+    
+    @RequestMapping("/main")
+    public String getMain(){
+        return "menu";
+    }
+    
     @RequestMapping("/data")
-    //@ResponseBody
     public String getDataKTP(Model model){
-        int record = datactrl.getDataCount();
+        int record = dataktpJpaController.getDataCount();
         String result = "";
-        try{
-            newdata = datactrl.findDataEntities().subList(0, record);
-        }
-        catch (Exception e){
-            result=e.getMessage();
+        try {
+            newdata = dataktpJpaController.findDataEntities().subList(0, record);
+        } catch (Exception e) {
+            result = e.getMessage();
         }
         
         model.addAttribute("goData", newdata);
-         model.addAttribute("record", record);
-         
+        //model.addAttribute("record", record);
+        
         return "database";
     }
 }
