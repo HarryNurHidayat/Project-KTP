@@ -13,32 +13,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/data">Database</a>
+            <div class="container">
+                <a class="navbar-brand" href="index.html">E-KTP</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                            <a class="nav-link active" aria-current="page" href="/data">Database</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/dummy">Dummy</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled">Disabled</a>
                         </li>
                     </ul>
                     <form class="d-flex">
@@ -50,34 +36,39 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         </nav>
         <br>
         <div align="center">Database KTP Indonesia - Dummy</div>
-        <a href="/create">Data baru</a>
-        <a href="/search">Cari data</a>
-        <br><br>
-        <div>
-            <div class="table-responsive">
-<!--                <table id="tabelKTP" class="table table-primary table-striped align-middle">-->
-                <table class="table align-middle">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Tanggal Lahir</th>
-                        <th scope="col">Foto</th>
-                        <th scope="col">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="goDummy:${goDummy}">
-                        <td th:text="${goDummy.id}"></td>
-                        <td th:text="${#calendars.format(goDummy.tanggal, 'dd-MM-yyyy')}"></td>
-                        <td><img width="50px" th:src="@{'/gambar/' + ${goDummy.id}}"/></td>
-                        
-                        <td><a th:href="${'/project.ktp/detail/' + goDummy.id}" class="btn btn-success">Detail</a>
-                            <a th:href="${'/update/' + goDummy.id}" class="btn btn-primary">Edit</a>
-                            <a th:href="${'/delete/' + goDummy.id}" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')">Delete</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <main class="py-4">
+            <div class="container-sm">
+                <div class="d-grid gap-2 d-md-block">
+                        <a href="/create" class= "btn btn-outline-primary  mb-3">Data baru</a><!-- comment -->
+                        <a href="/search" class= "btn btn-outline-primary  mb-3">Cari data</a>                 
+                    <br>
+                    <div>
+                        <div class="table-responsive-lg">
+                            <table class="table table-striped table-bordered">
+                                <thead class ="table-dark">
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Tanggal Lahir</th>
+                                        <th scope="col">Foto</th>
+                                        <th scope="col">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="goDummy:${goDummy}">
+                                        <td th:text="${goDummy.id}"></td>
+                                        <td th:text="${#calendars.format(goDummy.tanggal, 'dd-MM-yyyy')}"></td>
+                                        <td><img width="50px" th:src="@{'/gambar/' + ${goDummy.id}}"/></td>
+                                        <td><a th:href="${'' + goDummy.id}" class="btn btn-success">Detail</a>
+                                            <a th:href="${'/update/' + goDummy.id}" class="btn btn-primary">Edit</a>
+                                            <a th:href="${'/delete/' + goDummy.id}" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')">Delete</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </main> 
     </body>
 </html>
