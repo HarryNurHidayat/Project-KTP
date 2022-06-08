@@ -69,10 +69,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <tr th:each="goDummy:${goDummy}">
                         <td th:text="${goDummy.id}"></td>
                         <td th:text="${#calendars.format(goDummy.tanggal, 'dd-MM-yyyy')}"></td>
-                        <td><img src="@{${'/image?id='+ goDummy.id}}" class="rounded" alt="gambar" width="100"/></td>
+                        <td><img width="50px" th:src="@{'/gambar/' + ${goDummy.id}}"/></td>
+                        
                         <td><a th:href="${'/project.ktp/detail/' + goDummy.id}" class="btn btn-success">Detail</a>
-                            <a th:href="${'/project.ktp/edit/' + goDummy.id}" class="btn btn-primary">Edit</a>
-                            <a th:href="${'/project.ktp/delete/' + goDummy.id}" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')">Delete</a>
+                            <a th:href="${'/update/' + goDummy.id}" class="btn btn-primary">Edit</a>
+                            <a th:href="${'/delete/' + goDummy.id}" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')">Delete</a>
                         </td>
                     </tr>
                 </tbody>
